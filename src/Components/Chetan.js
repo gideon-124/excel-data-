@@ -297,9 +297,10 @@ const Chetan = () => {
           onClick={()=>{ 
             alert("chetan")
             debugger  
-          excelData.excelExport()  
           excelData.excelExport() 
-          excelData.excelExport() 
+          // excelData2.excelExport()
+          // excelData3.excelExport()
+          
           }}> 
           Download 
 
