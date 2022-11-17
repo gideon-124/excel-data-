@@ -260,4 +260,30 @@ input:-webkit-autofill:active {
 
 .e-tooltip-wrap .e-tip-content {
   font-size: 12px;
+} 
+.Factory-save-button{
+  border: 1px solid;
+  border-radius: 5px;
+  /* padding: 5px 20px 5px 20px; */
+  height: 40px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px; 
+}  
+.report-format{
+  display:inline; 
+  border:2px solid black;
+  padding: 4px !important;
+  padding-right: 200px;
+  width: 150px !important; 
+  cursor: pointer;
+  
+  border-spacing: 10;
+
+}
+.format-container{
+  margin-bottom: 3px !important;
 }
