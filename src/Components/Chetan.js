@@ -46,14 +46,15 @@ const JsonTable = require("ts-react-json-table");
 const Chetan = () => {
   const [items, setItems] = useState([]);
   const [itemsFiltered, setFilteredItems] = useState([]); 
-  // const [itemsFiltered2,setFilteredItems2]=useState([]) 
-  // const [itemsFiltered3, setFilteredItems3]=useState([])
+  const [itemsFiltered2,setFilteredItems2]=useState([]) 
+  const [itemsFiltered3, setFilteredItems3]=useState([])
   const [Format, setFormat] = useState();
   const [tabs, setTabs] = useState(["Orignal"]);
   const [fileName, setFileName] = useState(null);
 
   const toolbarOptions = ["ExcelExport"];
-  let excelData;
+  let excelData; 
+  let excelData1;
   let excelData2; 
   let excelData3;
   const data = [ 
@@ -111,14 +112,24 @@ const Chetan = () => {
       console.log(c, "ccc");
       setItems(c);
       setFilteredItems(c); 
-      // setFilteredItems2(c); 
-      // setFilteredItems3(c); 
+      setFilteredItems2(c); 
+      setFilteredItems3(c); 
       
     });
-  }; 
+  };  
+  var exportFilename1 = { 
+    fileName: 'Report1.xlsx',          
+ };  
+ var exportFilename2={ 
+  fileName:"'Report2.xlsx" 
+ } 
+ var exportFilename3={ 
+  fileName:"Report3.xlsx"
+ }
  
 
-  const handleChange = (event) => {
+  const handleChange = (event) => { 
+    // debugger
     setFormat(event.target.value);
     
     console.log("data", data);
@@ -156,14 +167,26 @@ const Chetan = () => {
     });
 
     console.log("Gopi", finalvalues);
-    console.log(itemsFiltered, "chetan");
+    console.log(itemsFiltered, "chetan"); 
+    
 
-    excelData.dataSource = [];
-    excelData.columns = [];
+    excelData1.dataSource = [];
+    excelData1.columns = [];  
+    
+
+    // excelData2.dataSource = [];
+    // excelData2.columns = [];  
+
+    // excelData3.dataSource = [];
+    // excelData3.columns = [];  
+
+    console.log(excelData1.dataSource, "chetan1")
+    
+    
 
     setFilteredItems(finalvalues);
-    // setFilteredItems2(finalvalues);
-    // setFilteredItems3(finalvalues); 
+    setFilteredItems2(finalvalues);
+    setFilteredItems3(finalvalues); 
    
       
     
@@ -174,7 +197,7 @@ const Chetan = () => {
   };
 
   const handleClick = (item) => { 
-    
+    // debugger 
     console.log("event-----",item);
     setFormat(item);
 
@@ -195,36 +218,67 @@ const Chetan = () => {
 
     console.log("Gopi", finalvalues);
 
-    excelData.dataSource = [];
-    excelData.columns = [];
+    excelData1.dataSource = [];
+    excelData1.columns = [];   
+
+    // excelData2.dataSource = [];
+    // excelData2.columns = [];  
+
+    // excelData3.dataSource = [];
+    // excelData3.columns = [];  
+    
+    
+    
+
 
     setFilteredItems(finalvalues);
-    // setFilteredItems2(finalvalues); 
-    // setFilteredItems3(finalvalues);  
+    setFilteredItems2(finalvalues); 
+    setFilteredItems3(finalvalues);  
    
-  };
+  }; 
+
 
   const convertExcelExport = (e) => { 
     
     // alert("chetan")
-    if (excelData && e.item.id === "excelData_excelexport") {
-      excelData.excelExport();
+    if (excelData && e.item.id === "excelData1_excelexport") { 
+      var exportProperties = {  
+        fileName: 'Report1.xlsx',          
+     };
+      excelData.excelExport(exportProperties);
+    } 
+  }; 
+
+  const convertExcelExport1 = (e) => { 
+    
+    // alert("chetan")
+    if (excelData1 && e.item.id === "excelData1_excelexport") { 
+      var exportProperties = {  
+        fileName: 'Report1.xlsx',          
+     };
+      excelData1.excelExport(exportProperties);
     } 
   };  
 
   const convertExcelExport2 = (e) => { 
     
     // alert("chetan")
-    if (excelData2 && e.item.id === "excelData2_excelexport") {
-      excelData2.excelExport();
+    if (excelData2 && e.item.id === "excelData2_excelexport") { 
+       var excelFile2={
+        fileName:"Report2.xlsx"
+       }
+      excelData2.excelExport(excelFile2);
     } 
   };
 
   const convertExcelExport3 = (e) => { 
     
     // alert("chetan")
-    if (excelData3 && e.item.id === "excelData3_excelexport") {
-      excelData3.excelExport();
+    if (excelData3 && e.item.id === "excelData3_excelexport") { 
+      var excelFile3={
+        fileName:"Report3.xlsx"
+      }
+      excelData3.excelExport(excelFile3);
     } 
   };
   
@@ -294,10 +348,23 @@ const Chetan = () => {
           >
           </Tabs> */} 
            <div style={{color:"#0E2F41", fontSize:"20px", fontFamily:"Comfortaa_Bold"}} className="Factory-save-button" 
-          onClick={()=>{ 
-            alert("chetan")
-            debugger  
-          excelData.excelExport() 
+          onClick={()=>{   
+            // debugger  
+            // alert("chetan")
+              excelData1.excelExport(exportFilename1);
+              excelData2.excelExport(exportFilename2);
+              excelData3.excelExport(exportFilename3);     
+
+           
+
+          //   debugger
+          //   // alert("chetan")
+               
+          //   if(excelData){   
+              
+          //     excelData.excelExport(exportFilename3) 
+          //   }
+          
           // excelData2.excelExport()
           // excelData3.excelExport()
           
@@ -324,7 +391,7 @@ const Chetan = () => {
                 }}
                 onClick={() => removeItem(item)}
               >
-                <CloseIcon />
+                <CloseIcon fontSize='small' />
               </div>
             </div>
           );
@@ -335,46 +402,59 @@ const Chetan = () => {
         className="col mx-0 px-0 mr-2 back"
         style={{ width: "4000px", marginTop: 10 }}
       >  
-         {/* {
+          {
                 (() => {  
                   if(Format==="Orignal") {
-                    return (
-                      <GridComponent
+                    return ( 
+                      <>  
+                      <div style={{ visibility: Format==="Orignal" ? 'visible':'hidden'}}>
+                      <GridComponent  
+                     
                       // id="test-table-xls-button"
-                      width={"75%"}
-                      dataSource={items}
+                      width={"75%"} 
+                      
+                      dataSource={itemsFiltered}
                       id="excelData"
-                      ref={(g) => (excelData = g)}
+                      ref={(g) => (excelData = g)} 
                       allowRowDragAndDrop={true}
                       allowExcelExport={true}
                       toolbar={["ExcelExport"]}
                       toolbarClick={convertExcelExport}
                     >
                       <Inject services={[Toolbar, ExcelExport]} />
-                    </GridComponent> 
+                    </GridComponent>   
+                    </div>
+                    </>
                     )
                 }
               
                     if(Format==='Report 1') {
-                            return (
-                              <GridComponent
+                            return ( 
+                              <>  
+                              <div style={{ visibility: Format==="Report 1" ? 'visible' : 'hidden'}} > 
+                              <GridComponent 
+                              
                               // id="test-table-xls-button"
                               width={"75%"}
                               dataSource={itemsFiltered}
-                              id="excelData"
-                              ref={(g) => (excelData = g)}
+                              id="excelData1"
+                              ref={(g) => (excelData1 = g)}
                               allowRowDragAndDrop={true}
                               allowExcelExport={true}
                               toolbar={["ExcelExport"]}
-                              toolbarClick={convertExcelExport}
+                              toolbarClick={convertExcelExport1}
                             >
                               <Inject services={[Toolbar, ExcelExport]} />
-                            </GridComponent> 
+                            </GridComponent>  
+                            </div> 
+                            </>
                             )
                         }  
                          if (Format==='Report 2') {
-                            return (
-                              <GridComponent
+                            return ( 
+                              <>  
+                              <div style={{ visibility: Format==="Report 2" ? 'visible': 'hidden'}}> 
+                              <GridComponent 
                               // id="test-table-xls-button"
                               width={"75%"}
                               dataSource={itemsFiltered2}
@@ -386,11 +466,15 @@ const Chetan = () => {
                               toolbarClick={convertExcelExport2}
                             >
                               <Inject services={[Toolbar, ExcelExport]} />
-                            </GridComponent> 
+                            </GridComponent>   
+                            </div>
+                            </>
                             )
                         }  
                         if(Format==="Report 3") {
-                            return (
+                            return (   
+                              <> 
+                              <div style={{ visibility: Format==="Report 3" ? 'visible': 'hidden'}} >
                               <GridComponent
                               // id="test-table-xls-button"
                               width={"75%"}
@@ -403,13 +487,15 @@ const Chetan = () => {
                               toolbarClick={convertExcelExport3}
                             >
                               <Inject services={[Toolbar, ExcelExport]} />
-                            </GridComponent> 
+                            </GridComponent>  
+                            </div> 
+                            </>
                             )
                         }
                 })()  
-            } */} 
+            }  
 
-        <GridComponent
+        {/* <GridComponent
           // id="test-table-xls-button"
           width={"75%"}
           dataSource={itemsFiltered}
@@ -421,7 +507,7 @@ const Chetan = () => {
           toolbarClick={convertExcelExport}
         >
           <Inject services={[Toolbar, ExcelExport]} />
-        </GridComponent>
+        </GridComponent> */}
 
         {/* <GridComponent
           // id="test-table-xls-button"
